@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">KotlinTrainingAccelerometer</string>
+    
+    <string name="rotation_azimuth_text">Azimuth: %f</string>
+    <string name="rotation_pitch_text">Pitch: %f</string>
+    <string name="rotation_roll_text">Roll: %f</string>
+
+</resources>
