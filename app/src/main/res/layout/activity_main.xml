@@ -5,6 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:padding="8dp"
     tools:context=".MainActivity">
 
     <com.google.android.material.textview.MaterialTextView
@@ -13,9 +14,8 @@
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
         android:textAppearance="?attr/textAppearanceHeadlineMedium"
-        android:text="@string/rotation_azimuth_text"/>
+        tools:text="test"/>
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/rotation_pitch"
@@ -23,9 +23,8 @@
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@id/rotation_azimuth"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
         android:textAppearance="?attr/textAppearanceHeadlineMedium"
-        android:text="@string/rotation_pitch_text"/>
+        tools:text="test"/>
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/rotation_roll"
@@ -33,8 +32,62 @@
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@id/rotation_pitch"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
         android:textAppearance="?attr/textAppearanceHeadlineMedium"
-        android:text="@string/rotation_roll_text"/>
+        tools:text="test"/>
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/offset_x"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@id/offset_y"
+        app:layout_constraintStart_toStartOf="parent"
+        android:textAppearance="?attr/textAppearanceHeadlineMedium"
+        tools:text="test"/>
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/offset_y"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:textAppearance="?attr/textAppearanceHeadlineMedium"
+        tools:text="test"/>
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/offset_z"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/offset_y"
+        app:layout_constraintStart_toStartOf="parent"
+        android:textAppearance="?attr/textAppearanceHeadlineMedium"
+        tools:text="test"/>
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/magnetic_field_x"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@id/magnetic_field_y"
+        app:layout_constraintStart_toStartOf="parent"
+        android:textAppearance="?attr/textAppearanceHeadlineMedium"
+        tools:text="test"/>
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/magnetic_field_y"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@id/magnetic_field_z"
+        app:layout_constraintStart_toStartOf="parent"
+        android:textAppearance="?attr/textAppearanceHeadlineMedium"
+        tools:text="test"/>
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/magnetic_field_z"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:textAppearance="?attr/textAppearanceHeadlineMedium"
+        tools:text="test"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

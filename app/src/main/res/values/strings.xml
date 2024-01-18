@@ -1,8 +1,15 @@
 <resources>
     <string name="app_name">KotlinTrainingAccelerometer</string>
     
-    <string name="rotation_azimuth_text">Azimuth: %f</string>
-    <string name="rotation_pitch_text">Pitch: %f</string>
-    <string name="rotation_roll_text">Roll: %f</string>
+    <string name="rotation_azimuth_text">Azimuth: %.2f</string>
+    <string name="rotation_pitch_text">Pitch: %.2f</string>
+    <string name="rotation_roll_text">Roll: %.2f</string>
 
+    <string name="offset_x_text">X: %.2f</string>
+    <string name="offset_y_text">Y: %.2f</string>
+    <string name="offset_z_text">Z: %.2f</string>
+
+    <string name="magnetic_field_x_text">MF X: %.2f</string>
+    <string name="magnetic_field_y_text">MF Y: %.2f</string>
+    <string name="magnetic_field_z_text">MF Z: %.2f</string>
 </resources>
