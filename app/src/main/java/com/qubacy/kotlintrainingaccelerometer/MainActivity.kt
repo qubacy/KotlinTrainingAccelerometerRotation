@@ -22,7 +22,8 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
 
         const val NOT_INITIALIZED_LONG = -1L
 
-        const val ACCELERATION_THRESHOLD = 0.3f // todo: should be set dynamically during a calibration stage;
+        const val ACCELERATION_THRESHOLD = 0.4f // todo: should be set dynamically during a calibration stage;
+        const val VELOCITY_THRESHOLD = 0.01f
 
         const val SENSOR_ITERATION_DURATION = 200L
     }
@@ -64,7 +65,7 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
         mSensorManager.registerListener(
             this, rotationSensor, SensorManager.SENSOR_DELAY_NORMAL)
         mSensorManager.registerListener(
-            this, linearAccelerationSensor, SensorManager.SENSOR_DELAY_NORMAL)
+            this, linearAccelerationSensor, SensorManager.SENSOR_DELAY_FASTEST)
         mSensorManager.registerListener(
             this, magneticFieldForceSensor, SensorManager.SENSOR_DELAY_NORMAL)
     }
@@ -113,8 +114,8 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
 
             return
         }
-        if (mPrevAccelerationUpdateTime + SENSOR_ITERATION_DURATION > updateTime)
-            return
+//        if (mPrevAccelerationUpdateTime + SENSOR_ITERATION_DURATION > updateTime)
+//            return
 
         val filteredAccelerationVector = filterAccelerationVector(accelerationVector)
         val siftedAccelerationVector = siftAccelerationVector(filteredAccelerationVector)
@@ -127,7 +128,7 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
         // projectedOffsetVector.
         offsetVector.forEachIndexed { index, value -> mResultOffsetVector[index] += value }
 
-        applyOffsetVectorToUi(accelerationVector) // mResultOffsetVector
+        applyOffsetVectorToUi(mResultOffsetVector) // mResultOffsetVector
     }
 
     private fun projectOffsetVectorWithAngles(
@@ -184,6 +185,23 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
             val accelerationToOffsetResult =
                 accelerationToOffset(accelerationVector[i], mPrevVelocityVector[i], interval)
 
+            if (accelerationToOffsetResult.curVelocity <= VELOCITY_THRESHOLD
+             && accelerationToOffsetResult.curVelocity >= -VELOCITY_THRESHOLD
+            ) {
+                mPrevVelocityVector[i] = 0f
+
+                continue
+            }
+
+            Log.d(TAG, "accelerationVectorToOffsetVector():" +
+                    "axisIndex = $i;" +
+                    " acceleration = ${accelerationVector[i]};" +
+                    " curVelocity = ${accelerationToOffsetResult.curVelocity};" //+
+                //" curVelocity = $curVelocity;" +
+                //" distance = $distance;" +
+                //" interval = $interval"
+            )
+
             mPrevVelocityVector[i] = accelerationToOffsetResult.curVelocity
             offsetVector[i] = accelerationToOffsetResult.distance
         }
@@ -203,14 +221,6 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
     ): AccelerationToOffsetResult {
         val curVelocity = prevVelocity + acceleration * interval
         val distance = prevVelocity * interval + 0.5f * acceleration * interval * interval
-
-        Log.d(TAG, "accelerationToOffset():" +
-                " acceleration = $acceleration;" +
-                " prevVelocity = $prevVelocity;" +
-                " curVelocity = $curVelocity;" +
-                " distance = $distance;" +
-                " interval = $interval"
-        )
 
         return AccelerationToOffsetResult(curVelocity, distance)
     }
